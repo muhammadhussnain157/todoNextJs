@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  todo-jenkins-app:
+    image: node:18-alpine
+    container_name: todo-jenkins-web
+    working_dir: /app
+    
+    # VOLUME MOUNT: Code attached as volume (NOT Dockerfile)
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/.next
+    
+    # Different port: 3001 (Part-I uses 3000)
+    ports:
+      - "3001:3000"
+    
+    environment:
+      - MONGODB_URI=mongodb://admin:todoapp123@todo-jenkins-db:27017/tododb?authSource=admin
+      - NODE_ENV=production
+    
+    command: sh -c "npm install --production=false && npm run build && npm start"
+    
+    depends_on:
+      - todo-jenkins-db
+    
+    restart: unless-stopped
+    networks:
+      - todo-jenkins-network
+
+  todo-jenkins-db:
+    image: mongo:7.0
+    container_name: todo-jenkins-db
+    
+    # Different port: 27018 (Part-I uses 27017)
+    ports:
+      - "27018:27017"
+    
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=todoapp123
+      - MONGO_INITDB_DATABASE=tododb
+    
+    volumes:
+      - mongodb-jenkins-data:/data/db
+      - mongodb-jenkins-config:/data/configdb
+    
+    restart: unless-stopped
+    networks:
+      - todo-jenkins-network
+    
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongodb-jenkins-data:
+    driver: local
+  mongodb-jenkins-config:
+    driver: local
+
+networks:
+  todo-jenkins-network:
+    driver: bridge
