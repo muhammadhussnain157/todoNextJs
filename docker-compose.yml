@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - MONGODB_URI=mongodb://admin:todoapp123@todo-part1-db:27017/tododb?authSource=admin
     ports:
       - "3000:3000"
     environment:
