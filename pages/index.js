@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getSession } from 'next-auth/react';
 import connectDb from '../lib/connectDb';
 import Todo from '../models/Todo';
 import NewTodo from '../components/todo/NewTodo';
@@ -42,9 +43,20 @@ function Home({ todos }) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/auth/login',
+                permanent: false,
+            },
+        };
+    }
+
     await connectDb();
-    const todos = await Todo.find({});
+    const todos = await Todo.find({ userId: session.user.id });
     return {
         props: {
             todos: todos.map(todo => ({

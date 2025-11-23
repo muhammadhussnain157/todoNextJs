@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import {
     faStar as farStar,
     faCalendar as farCalendarDay,
@@ -13,6 +14,11 @@ import { useRouter } from 'next/router';
 function SideBar(props) {
     const router = useRouter();
     const pageTitle = usePageTitle(router.pathname);
+
+    const handleLogout = async () => {
+        await signOut({ redirect: true, callbackUrl: '/auth/login' });
+    };
+
     return (
         <aside className={classes.sidebar}>
             <section className={classes.toggleSideBarSect}>
@@ -56,6 +62,12 @@ function SideBar(props) {
                     </Link>
                 </li>
             </ul>
+            <div className={classes.logoutBtn}>
+                <button className={classes.logoutButton} onClick={handleLogout}>
+                    <FontAwesomeIcon icon={faSignOutAlt} />
+                    <span>Logout</span>
+                </button>
+            </div>
         </aside>
     );
 }

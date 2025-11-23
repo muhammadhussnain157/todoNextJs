@@ -8,13 +8,14 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: #efefef;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     z-index: 999;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .toggleSideBarSect {
-    padding: 0.5em 0;
+    padding: 1em 0;
     width: 100%;
 }
 
@@ -23,16 +24,18 @@
     padding: 0.5em 1em;
     cursor: pointer;
     width: max-content;
+    border-radius: 8px;
+    transition: all 0.2s;
 }
 
 .bars:hover {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .bars div {
     width: 2.25em;
     height: 0.25em;
-    background-color: #34373d;
+    background-color: #ffffff;
     margin: 7px 0;
     border-radius: 1em;
 }
@@ -40,6 +43,7 @@
 .ul {
     list-style-type: none;
     width: 100%;
+    padding: 1em 0;
 }
 
 .button {
@@ -47,29 +51,64 @@
     flex: 1 auto;
     cursor: pointer;
     padding: 0 0.75em;
-    background-color: #efefef;
+    transition: all 0.2s;
+    color: #ffffff;
+    margin: 0.25em 0;
 }
 
 .button:hover {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .buttonInner {
-    padding: 0.5em 0;
+    padding: 0.75em 1em;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: row;
     font-size: 0.95rem;
+    border-radius: 8px;
 }
 
 .title {
     flex: 1;
-    margin: 0 0.5em;
+    margin: 0 0.75em;
+    font-weight: 500;
 }
 
 .active {
-    background-color: aqua !important;
+    background-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.active .buttonInner {
+    font-weight: 600;
+}
+
+.logoutBtn {
+    margin-top: auto;
+    width: 100%;
+    padding: 1em;
+}
+
+.logoutButton {
+    width: 100%;
+    padding: 0.75em 1em;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.logoutButton:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
 }
 
 @media (min-width: 50em) {

@@ -2,14 +2,20 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    border: 1px solid transparent;
-    border-bottom: 2px solid #eedddd;
-    border-radius: 0.25em;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
     overflow: hidden;
     width: 100%;
-    padding: 0.5em 0.75em;
-    margin-top: 1em;
-    background-color: #efefef;
+    padding: 0.75em 1em;
+    margin-top: 1.5em;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.wrapper:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #cbd5e0;
 }
 
 .inputWrapper {
@@ -19,24 +25,25 @@
 
 .input {
     width: 100%;
-    font-size: 1.1rem;
+    font-size: 1rem;
     background-color: transparent;
     border: none;
     line-height: 2.5rem;
     flex: 1;
+    color: #2d3748;
 }
 
 .input::-moz-placeholder {
-    color: #8e8e8e;
+    color: #a0aec0;
     opacity: 1;
 }
 
 .input:-ms-input-placeholder {
-    color: #8e8e8e;
+    color: #a0aec0;
 }
 
 .input::-webkit-input-placeholder {
-    color: #8e8e8e;
+    color: #a0aec0;
 }
 
 .input:focus {
@@ -44,38 +51,42 @@
 }
 
 .focused {
-    border-bottom: 2px solid #0000ff !important;
+    border-color: #667eea !important;
 }
 
 .icon {
     position: absolute;
     left: 0.75em;
-    transform: scale(1.1) translateY(-50%);
+    transform: scale(1.2) translateY(-50%);
     top: 50%;
-    color: #8e8e8e;
+    color: #667eea;
     flex: 1;
 }
 
 .addBtn {
-    border: 1px solid transparent;
-    padding: 0.5em 0.75em;
-    border-radius: 0.35em;
+    border: none;
+    padding: 0.6em 1.5em;
+    border-radius: 8px;
     align-self: flex-end;
-    margin-right: 2em;
+    margin-right: 1em;
     margin-top: 1em;
-    background-color: #b4adad;
-    color: #000000;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
     cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
 }
 
 .addBtn:hover {
-    background-color: #fee715ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 .addBtn:disabled,
 .addBtn[disabled] {
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
+    background: #cbd5e0;
+    color: #718096;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }

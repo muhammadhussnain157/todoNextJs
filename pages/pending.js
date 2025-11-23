@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import connectDb from '../lib/connectDb';
 import Todo from '../models/Todo';
 import TodoList from '../components/todo/TodoList';
@@ -17,9 +18,20 @@ function PendingTasks({ todos }) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/auth/login',
+                permanent: false,
+            },
+        };
+    }
+
     await connectDb();
-    const todos = await Todo.find({ task_done: false });
+    const todos = await Todo.find({ task_done: false, userId: session.user.id });
     return {
         props: {
             todos: todos.map(todo => ({

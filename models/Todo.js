@@ -13,6 +13,15 @@ const TodoSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 export default mongoose.models.Todo || mongoose.model('Todo', TodoSchema);
