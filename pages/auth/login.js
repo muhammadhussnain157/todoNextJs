@@ -74,8 +74,8 @@ function Login() {
                     </form>
                     <div className={classes.footer}>
                         <p>
-                            Don't have an account?{' '}
-                            <Link href="/auth/signup">
+                            Don&apos;t have an account?{' '}
+                            <Link href="/auth/signup" passHref>
                                 <span className={classes.link}>Sign up</span>
                             </Link>
                         </p>

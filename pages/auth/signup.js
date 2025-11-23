@@ -101,7 +101,7 @@ function Signup() {
                     <div className={classes.footer}>
                         <p>
                             Already have an account?{' '}
-                            <Link href="/auth/login">
+                            <Link href="/auth/login" passHref>
                                 <span className={classes.link}>Sign in</span>
                             </Link>
                         </p>
