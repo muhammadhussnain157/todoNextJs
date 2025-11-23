@@ -19,6 +19,8 @@ services:
     environment:
       - MONGODB_URI=mongodb://admin:todoapp123@todo-jenkins-db:27017/tododb?authSource=admin
       - NODE_ENV=production
+      - NEXTAUTH_URL=http://13.235.97.7:3001
+      - NEXTAUTH_SECRET=e0232e2e423724a78deeea88d021aee0d9ec43c3f39bb994e421582381c338fe
     
     command: sh -c "npm install --production=false && npm run build && npm start"
     
