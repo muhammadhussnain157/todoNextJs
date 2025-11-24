@@ -21,13 +21,16 @@ function Login() {
             redirect: false,
             email,
             password,
+            callbackUrl: '/',
         });
 
         setIsLoading(false);
 
         if (result.error) {
             setError(result.error);
-        } else {
+        } else if (result.ok) {
+            // Wait a bit to ensure session is set before navigation
+            await new Promise(resolve => setTimeout(resolve, 500));
             router.push('/');
         }
     };
