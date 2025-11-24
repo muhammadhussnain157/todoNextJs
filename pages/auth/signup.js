@@ -27,18 +27,8 @@ function Signup() {
             });
 
             if (response.status === 201) {
-                // Auto login after signup
-                const result = await signIn('credentials', {
-                    redirect: false,
-                    email,
-                    password,
-                });
-
-                if (result.error) {
-                    setError(result.error);
-                } else {
-                    router.push('/');
-                }
+                // Redirect to login page instead of auto login (align with test expectations)
+                router.push('/auth/login');
             }
         } catch (err) {
             setError(err.response?.data?.message || 'Something went wrong');

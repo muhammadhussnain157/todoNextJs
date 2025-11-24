@@ -34,6 +34,7 @@ export async function getServerSideProps(context) {
     const todos = await Todo.find({ important: true, userId: session.user.id });
     return {
         props: {
+            session,
             todos: todos.map(todo => ({
                 _id: todo._id.toString(),
                 content: todo.content,
