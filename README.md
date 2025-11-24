@@ -1,4 +1,4 @@
-# TODO App - Docker & Jenkins Deployment
+# TODO App - Docker & Jenkins Deployment along with Selenium Testing
 
 A Next.js TODO application with MongoDB backend, configured for containerized deployment on AWS EC2 using Docker and Jenkins CI/CD pipeline with automated Selenium testing.
 
