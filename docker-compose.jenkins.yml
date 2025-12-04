@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   todo-jenkins-app:
     image: node:18-alpine
@@ -24,8 +22,10 @@ services:
     
     command: sh -c "npm install --production=false && npm run build && npm start"
     
+    # IMPORTANT: Wait for DB to be healthy before starting
     depends_on:
-      - todo-jenkins-db
+      todo-jenkins-db:
+        condition: service_healthy
     
     restart: unless-stopped
     networks:
@@ -52,11 +52,13 @@ services:
     networks:
       - todo-jenkins-network
     
+    # IMPORTANT: Added start_period for initial startup time
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 40s
 
 volumes:
   mongodb-jenkins-data:
